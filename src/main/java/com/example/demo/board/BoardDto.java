@@ -4,11 +4,10 @@ import lombok.*;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardDTO {
-    private String id;
+@ToString
+public class BoardDto {
     private String title;
     private String writer;
 }

@@ -22,6 +22,10 @@ public class UserEntity {
 
     private String password;
 
+    private String email;
+
+    private String role;
+
     @OneToMany(mappedBy = "user")
     private List<BoardEntity> boards = new ArrayList<>();
 }

@@ -24,8 +24,8 @@ public class BoardEntity {
     private String title;
 
     @ManyToOne
-    private UserEntity User;
+    private UserEntity user;
 
-    @OneToMany(mappedBy = "BoardEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemEntity> items = new ArrayList<>();
 }

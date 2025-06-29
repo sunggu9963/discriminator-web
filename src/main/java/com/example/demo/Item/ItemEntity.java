@@ -20,5 +20,5 @@ public class ItemEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BoardEntity_id")
-    private BoardEntity boardEntity;
+    private BoardEntity board;
 }
