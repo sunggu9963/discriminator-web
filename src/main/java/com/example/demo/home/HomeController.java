@@ -1,4 +1,4 @@
-package com.example.demo.ConText.home;
+package com.example.demo.home;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
