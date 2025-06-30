@@ -11,6 +11,5 @@ import lombok.*;
 public class BoardRequestDto {
     private Long id;
     private String title;
-    private String writer;
     private ItemDto item;
 }
