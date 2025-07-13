@@ -7,7 +7,7 @@ import org.mapstruct.Mapping;
 public interface BoardMapper {
     BoardEntity toEntity(BoardDto boardDto);
 
-    @Mapping(source = "user.username", target = "writer")
+    @Mapping(source = "user.username ", target = "writer")
     BoardDto toDto(BoardEntity boardEntity);
 
     BoardRequestDto toDtoRequest(BoardEntity boardEntity);
