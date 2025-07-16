@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,11 +20,23 @@ public class UserController {
     //public String signup(UserDto userDto) {
     //    return "signup";
     //}
+    @GetMapping("/signup")
+    public String signupForm(Model model) {
+        model.addAttribute("userDto", new UserDto());
+        return "signup";
+    }
 
     @PostMapping("/signup")
-    public String signup(@Valid UserDto userDto, BindingResult bindingResult) {
+    public String signup(@Valid UserDto userDto, BindingResult bindingResult, Model model) {
+        model.addAttribute("formType", "register");
         if (bindingResult.hasErrors()) {
-            return "signup";
+            return "login";
+        }
+
+        if(!userDto.getPassword().equals(userDto.getPasswordcheck())) {
+            bindingResult.rejectValue("passwordcheck", "passwordInCorrect",
+                    "패스워드 불일치");
+            return "login";
         }
 
         try {
@@ -31,14 +44,13 @@ public class UserController {
         } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
-            return "signup";
+            return "login";
         } catch (Exception e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", e.getMessage());
-            return "signup";
+            return "login";
         }
-
-        return "redirect:/";
+        return "login";
     }
 
     @GetMapping("/login")

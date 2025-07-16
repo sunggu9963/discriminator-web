@@ -15,9 +15,9 @@ public class UserDto {
     @NotBlank(message = "ID를 입력해주세요.")
     private String username;
     @NotBlank(message = "비밀번호를 입력해주세요.")
-    private String password1;
+    private String password;
     @NotBlank(message = "비밀번호 확인은 필수항목입니다.")
-    private String password2;
+    private String passwordcheck;
     @NotBlank(message = "이메일은 입력해주세요.")
     @Email
     private String email;

@@ -52,7 +52,16 @@
   color: #4CAF50;
   text-decoration: none;
 }
+.form .login-form {
+  display: block;
+}
 .form .register-form {
+  display: none;
+}
+body.show-register .register-form {
+  display: block;
+}
+body.show-register .login-form {
   display: none;
 }
 .container {
