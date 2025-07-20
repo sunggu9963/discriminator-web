@@ -50,6 +50,7 @@ public class UserController {
             bindingResult.reject("signupFailed", e.getMessage());
             return "login";
         }
+        model.addAttribute("formType", "login");
         return "login";
     }
 

@@ -11,6 +11,12 @@ body {
   padding: 20px;
 }
 
+.form-group input {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
 .file-upload-btn {
   width: 100%;
   margin: 0;

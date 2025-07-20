@@ -1,10 +1,12 @@
 package com.example.demo.board;
 
+import com.example.demo.User.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,12 +30,12 @@ public class BoardController {
             BindingResult bindingResult,
             Principal principal
     ) {
-        //UserEntity user = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserEntity user = (UserEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(bindingResult.hasErrors()) {
             return "redirect:/board/fail";
         }
 
-        //boardService.addItem(boardRequestDto);
+        boardService.addItem(boardRequestDto, user);
 
         return "redirect:/board/boardList";
     }
