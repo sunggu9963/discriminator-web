@@ -43,6 +43,7 @@ $('.image-upload-wrap').bind('dragover', function () {
 });
 
     </script>
+    <span sec:authentication="principal.username"></span>
 <form th:action="@{/api/ocr/upload}" method="post" enctype="multipart/form-data">
 <div class="file-upload">
     <div class="form-group">

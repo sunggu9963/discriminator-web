@@ -3,6 +3,7 @@ package com.example.demo.api;
 import com.example.demo.Item.ItemDto;
 import com.example.demo.User.UserEntity;
 import com.example.demo.board.BoardRequestDto;
+import com.example.demo.board.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +21,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ApiService {
 
+    private final BoardService boardService;
     private String ocrServerUrl;
 
     public void fileUpload(MultipartFile file ,String title, UserEntity user) {
@@ -41,12 +43,18 @@ public class ApiService {
             Map<String, Object> responseBody = response.getBody();
 
             ItemDto itemDto = new ItemDto();
-            itemDto.setModelSpec(responseBody.get("modelSpec").toString());
-            itemDto.setSerialNumber(responseBody.get("serialNumber").toString());
+            itemDto.setModelSpec(responseBody.get("modelspec").toString());
+            itemDto.setSerialNumber(responseBody.get("serialnum").toString());
+            System.out.println(responseBody.get("modelspec").toString());
+            System.out.println(responseBody.get("serialnum").toString());
+            System.out.println("username: " + user.getUsername() + "user_id: " + user.getId());
 
             BoardRequestDto boardRequestDto = new BoardRequestDto();
             boardRequestDto.setTitle(title);
             boardRequestDto.setItem(itemDto);
+
+            boardService.addItem(boardRequestDto, user);
+
 
 
 

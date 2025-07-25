@@ -29,6 +29,7 @@ public class BoardService {
                 });
         ItemEntity itemEntity = itemMapper.toEntity(boardRequestDto.getItem());
         itemEntity.setBoard(boardEntity);
+        userEntity.getBoards().add(boardEntity);
         boardEntity.getItems().add(itemEntity);
 
         boardRepository.save(boardEntity);

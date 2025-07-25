@@ -3,6 +3,8 @@ package com.example.demo.User;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,7 +23,12 @@ public class UserController {
     //    return "signup";
     //}
     @GetMapping("/signup")
-    public String signupForm(Model model) {
+    public String signupForm(Model model, Authentication authentication) {
+
+        if (this.isAuthenticated(authentication)) {
+            return "redirect:/";
+        }
+
         model.addAttribute("userDto", new UserDto());
         return "signup";
     }
@@ -55,7 +62,15 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login(UserDto userDto) {
+    public String login(UserDto userDto, Authentication authentication) {
+
+        if (this.isAuthenticated(authentication)) {
+            return "redirect:/";
+        }
         return "login";
+    }
+    private boolean isAuthenticated(Authentication authentication) {
+        return authentication != null && authentication.isAuthenticated()
+                && !(authentication instanceof AnonymousAuthenticationToken);
     }
 }

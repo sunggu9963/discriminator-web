@@ -26,7 +26,7 @@ public class SecurityConfig {
                         // POST
                         // 시큐리티에게 로그인 폼 처리 url을 알려준다.
                         .loginProcessingUrl("/user/login") // 로그인 처리시 요청 경로
-                        .defaultSuccessUrl("/board/list")) // 로그인 성공시 리다이렉트 경로
+                        .defaultSuccessUrl("/")) // 로그인 성공시 리다이렉트 경로
                 .logout(logout -> logout
                         // .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
                         .logoutUrl("/user/logout")
