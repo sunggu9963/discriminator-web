@@ -1,0 +1,10 @@
+.fixed-table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.fixed-table th, .fixed-table td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

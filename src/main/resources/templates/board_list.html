@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link href="css/bootstrap.css" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/board.css}">
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -41,7 +43,7 @@
 </head>
 <body>
 <div class="container">
-    <table class="table table-hover">
+    <table class="table table-hover fixed-table">
         <h3>게시판</h3>
         <form class="form-inline d-flex justify-content-end" method="GET", th:action="@{/board/boardList}" th:value="${param.searchText}">
             <div class="form-group mx-sm-3 mb-2 pull-right">
@@ -59,8 +61,8 @@
         </thead>
         <tbody>
         <tr th:each="board : ${boardlist}">
-            <td><a th:href="@{'/board/boardContent/' + ${board.id}}"><span th:text="${board.id}"></span></a></td>
-            <td th:text="${board.title}"></td>
+            <td><a th:href="@{'/board/detail/' + ${board.id}}"><span th:text="${board.id}"></span></a></td>
+            <td><a th:href="@{'/board/detail/' + ${board.id}}"><span th:text="${board.title}"></span></a></td>
             <td th:text="${board.writer}"></td>
         </tr>
         </tbody>
@@ -72,11 +74,11 @@
     <div class="center text-center">
         <nav aria-label="Page navigation example">
             <ul class="pagination justifiy-content-center" th:if="${totalPage != 0}">
-                <li class="page-item"><a class="page-link" th:href="@{/board/boardList(page=${boardlist.pageable.pageNumber - 1}, searchText=${param.searchText})}">Previous</a></li>
+                <li class="page-item" th:classappend="${boardlist.first} ? 'disabled'"><a class="page-link" th:href="${boardlist.first} ? '#' : @{/board/boardList(page=${boardlist.pageable.pageNumber}, searchText=${param.searchText})}">Previous</a></li>
                 <li class="" th:classappend="${page == boardlist.pageable.pageNumber + 1} ? 'disabled'" th:each="page : ${#numbers.sequence(startPage, endPage)}">
-                    <a th:href="@{/board/boardList(page=${page - 1}, searchText=${param.searchText})}" th:text="${page}"></a>
+                    <a th:href="@{/board/boardList(page=${page}, searchText=${param.searchText})}" th:text="${page}"></a>
                 </li>
-                <li class="page-item"><a class="page-link" th:href="@{/board/boardList(page=${boardlist.pageable.pageNumber + 1}, searchText=${param.searchText})}">Next</a></li>
+                <li class="page-item" th:classappend="${boardlist.last} ? 'disabled'"><a class="page-link" th:href="${boardlist.last} ? '#' : @{/board/boardList(page=${boardlist.pageable.pageNumber + 2}, searchText=${param.searchText})}">Next</a></li>
             </ul>
         </nav>
     </div>

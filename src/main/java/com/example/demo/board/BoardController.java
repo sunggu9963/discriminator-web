@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -40,9 +41,18 @@ public class BoardController {
         return "redirect:/board/boardList";
     }
 
+    @GetMapping("/detail/{id}")
+    public String detail(Model model, @PathVariable("id") Long id) {
+        BoardDto boardDto = boardService.getBoard(id);
+
+        model.addAttribute("board", boardDto);
+
+        return "board_detail";
+    }
+
     @GetMapping("boardList")
     public String paging(@PageableDefault(page = 1) Pageable pageable, Model model){
-        Page<BoardDto> boardlist = boardService.paging(pageable);
+        Page<BoardListDto> boardlist = boardService.paging(pageable);
         int blockLimit = 3;
         int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) -1) * blockLimit + 1;
         int endPage = ((startPage + blockLimit - 1) < boardlist.getTotalPages()) ? startPage + blockLimit -1 : boardlist.getTotalPages();

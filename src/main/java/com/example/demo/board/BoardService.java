@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class BoardService {
@@ -37,14 +39,25 @@ public class BoardService {
 
     }
 
+    public BoardDto getBoard(Long id) {
+        Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(id);
+        if (optionalBoardEntity.isPresent()) {
+            BoardEntity boardEntity = optionalBoardEntity.get();
+            BoardDto boardDto = boardMapper.toDto(boardEntity);
+            return boardDto;
+        } else {
+            return null;
+        }
+    }
 
-    public Page<BoardDto> paging(Pageable pageable) {
+
+    public Page<BoardListDto> paging(Pageable pageable) {
         int page = pageable.getPageNumber() -1;
         int pageLimit = 3;
 
         Page<BoardEntity> boardEntities = boardRepository.findAll(PageRequest.of(page, pageLimit, Sort.Direction.DESC, "id"));
 
-        Page<BoardDto> boardDtos = boardEntities.map(board -> boardMapper.toDto(board));
+        Page<BoardListDto> boardDtos = boardEntities.map(board -> boardMapper.toListDto(board));
         return boardDtos;
     }
 
