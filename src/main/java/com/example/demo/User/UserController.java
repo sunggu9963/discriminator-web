@@ -22,16 +22,16 @@ public class UserController {
     //public String signup(UserDto userDto) {
     //    return "signup";
     //}
-    @GetMapping("/signup")
-    public String signupForm(Model model, Authentication authentication) {
-
-        if (this.isAuthenticated(authentication)) {
-            return "redirect:/";
-        }
-
-        model.addAttribute("userDto", new UserDto());
-        return "signup";
-    }
+//    @GetMapping("/signup")
+//    public String signupForm(Model model, Authentication authentication) {
+//
+//        if (this.isAuthenticated(authentication)) {
+//            return "redirect:/";
+//        }
+//
+//        model.addAttribute("userDto", new UserDto());
+//        return "signup";
+//    }
 
     @PostMapping("/signup")
     public String signup(@Valid UserDto userDto, BindingResult bindingResult, Model model) {

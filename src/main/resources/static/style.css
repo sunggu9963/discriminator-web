@@ -1,5 +1,5 @@
 body {
-  font-family: sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #eeeeee;
 }
 
@@ -14,7 +14,7 @@ body {
 .form-group input {
   display: block;
   margin: 0 auto;
-  margin-bottom: 10px;
+
 }
 
 .file-upload-btn {
@@ -77,11 +77,11 @@ body {
   color: #222;
 }
 
-.drag-text {
+.upload-drag-text {
   text-align: center;
 }
 
-.drag-text h3 {
+.upload-drag-text h3 {
   font-weight: 100;
   text-transform: uppercase;
   color: #15824B;

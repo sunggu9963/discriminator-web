@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <meta charset="UTF-8">
     <title>detail</title>
 </head>
@@ -19,7 +21,7 @@
 }
 </style>
 <body>
-
+<nav th:replace="~{navbar :: navbarFragment}"></nav>
 <div class="board-detail">
   <h2 th:text="${board.title}">제목</h2>
   <p><strong>작성자:</strong> <span th:text="${board.writer}">writer</span></p>
